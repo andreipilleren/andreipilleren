@@ -1,0 +1,100 @@
+Overthewire.org (This is my documentation and process on the wargames in the site overthewire.org under the Bandit wargames)
+Note: This is to enhance my knowledge on Linux OS and knowing how to navigate the system.
+
+Level 0
+  Process:
+          1. SSH into bandit0, connecting to: bandit.labs.overthewire.org, pass: bandit0, specific port: 2220
+              Command: ssh bandit0@bandit.labs.overthewire.org -p 2220
+                Explaination: -p is to specify a specific port instead of the default port of ssh which is 22
+Level 0-1
+  Process:
+    1. Once logged in to bandit 0, there was a file called readme and inside contained the password for the next level 
+      Commmand: ls, cat 
+        ls
+        cat readme
+        Password: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+      Explanation: ls (list files on the current directory), cat (reads a specified file)
+Level 1-2 
+  Process: 
+    1. Using password gained from previous level, SSH into bandit1
+      Command: 
+          ssh bandit1@bandit.labs.overthewire.org
+          Password: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+          ls 
+          cat < - (in order to read the dashed - file name it must be inputted like this)
+          Level 2 Pass: rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+Level 2-3
+    Process:
+      1. using password from previous level, ssh, and read the file name
+        ls
+        cat "spaces in this file name" (to read a file that have spaces, "" is used) 
+        Level 3 Pass: aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+Level 3-4 
+    Process:
+      ls
+      cd inhere
+      ls -a (list all files including hidden)
+      Level 4 Pass: 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+Level 4-5 
+    Process:
+      cd /inhere
+      ls
+      file ./-file* (./ is a way to read a dashed - filename) 
+      cat ./-file07 (is the only human-readable file)
+      Level 5 Pass: lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+Level 5-6 
+1.	Cd /inhere
+2.	Lots of directories
+a.	Ls ~/inhere/* -h | find -type f ! -executable | find -size 1033c
+3.	The command lists the files that’s human-readable 
+4.	Then finds for the type that is a file that is not executable 
+5.	Finally finds the size that is 1033 bytes
+6. Password Level 6: P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+
+Level 6-7 
+1.	Ssh into the user
+2.	Find / -type f -user bandit7 -group bandit6 -size 33c 
+a.	Finds a file type
+3.	Flag is located in: /var/lib/dpkg/info/bandit7.password
+4. Password Level 7: z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+
+Level 7-8 
+1. SSH into user
+2. Cat data.txt | grep millionth
+3. Password Level 8: TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+
+Level 8-9
+1. SSH into user
+2. cat data.txt | sort | uniq -u 
+Password Level 9: EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+
+Level 9-10 
+1. strings -d data.txt | grep "==="
+Password Level 10: G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+
+Level 10-11 
+1. base64 -d data.txt 
+Password Level 11: 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
+
+Level 11-12
+1. Password is encoded in rot13 
+rot13 decoder
+Password Level 12: JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
+
+Level 12-13 
+1. made directory in /tmp folder: mkdir /tmp/decoding
+2. copied data.xt: cp data.txt /tmp/decoding
+3. xxd -r data.txt > data1.txt 
+4. file is gzip compressed: mv data1.txt data1.gz --->>> gunzip data1.gz
+5. file is bzip2 compressed: mv data1 data1.bz2 >>>>>> bzip2 -d data1.bz2
+6. file is gzip compreesed: mv data1 data1.gz >>>> gunzip data1.gz
+7. file is POSIX tar archive (GNU): mv data1 data1.tar.gz >>>> tar -xvf data1.tar.gz 
+8. file is POSIX tar archive (GNU): mv data5.bin data5.tar.gz >>>> tar -xvf data1.tar.gz
+9. file is bzip2 compressed: mv data.bin data6.bz2 >>>>> bzip2 -d data6.bin
+10. file is POSIX tar archive: mv data6 data6.tar.gz >>>>> tar -xvf data6.tar.gz 
+11. file is gzip: mv data8.bin data8.gz >>>> gunzip data8.gz
+Password Level 13: wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
+
+
+
+        
